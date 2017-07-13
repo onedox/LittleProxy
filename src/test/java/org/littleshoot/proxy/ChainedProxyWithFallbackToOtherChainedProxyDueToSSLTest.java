@@ -6,6 +6,8 @@ import java.util.Queue;
 
 import javax.net.ssl.SSLEngine;
 
+import org.littleshoot.proxy.impl.ClientToProxyConnection;
+
 /**
  * Tests a proxy chained to a downstream proxy with an untrusted SSL cert. When
  * the downstream proxy is unavailable, the downstream proxy should just fall
@@ -21,7 +23,7 @@ public class ChainedProxyWithFallbackToOtherChainedProxyDueToSSLTest extends
     protected ChainedProxyManager chainedProxyManager() {
         return new ChainedProxyManager() {
             @Override
-            public void lookupChainedProxies(HttpRequest httpRequest,
+            public void lookupChainedProxies(HttpRequest httpRequest, ClientToProxyConnection clientConnection,
                     Queue<ChainedProxy> chainedProxies) {
                 // This first one has a bad cert
                 chainedProxies.add(newChainedProxy());

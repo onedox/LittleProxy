@@ -160,7 +160,7 @@ public class ProxyToServerConnection extends ProxyConnection<HttpResponse> {
         ChainedProxyManager chainedProxyManager = proxyServer
                 .getChainProxyManager();
         if (chainedProxyManager != null) {
-            chainedProxyManager.lookupChainedProxies(initialHttpRequest,
+            chainedProxyManager.lookupChainedProxies(initialHttpRequest, clientConnection,
                     chainedProxies);
             if (chainedProxies.size() == 0) {
                 // ChainedProxyManager returned no proxies, can't connect
@@ -686,6 +686,7 @@ public class ProxyToServerConnection extends ProxyConnection<HttpResponse> {
                 if (statusCode >= 200 && statusCode <= 299) {
                     connectOk = true;
                 }
+                chainedProxy.connectResponseReceived(httpResponse);
             }
             if (connectOk) {
                 flow.advance();

@@ -5,6 +5,7 @@ import io.netty.handler.codec.http.HttpRequest;
 import java.util.Queue;
 
 import org.junit.Test;
+import org.littleshoot.proxy.impl.ClientToProxyConnection;
 
 /**
  * Tests that when there are no chained proxies, we get a bad gateway.
@@ -16,7 +17,7 @@ public class NoChainedProxiesTest extends AbstractProxyTest {
                 .withPort(0)
                 .withChainProxyManager(new ChainedProxyManager() {
                     @Override
-                    public void lookupChainedProxies(HttpRequest httpRequest,
+                    public void lookupChainedProxies(HttpRequest httpRequest, ClientToProxyConnection clientConnection,
                             Queue<ChainedProxy> chainedProxies) {
                         // Leave list empty
                     }

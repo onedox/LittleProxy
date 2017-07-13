@@ -990,7 +990,7 @@ public class ClientToProxyConnection extends ProxyConnection<HttpRequest> {
         
         String userName = StringUtils.substringBefore(decodedString, ":");
         String password = StringUtils.substringAfter(decodedString, ":");
-        if (!authenticator.authenticate(userName, password)) {
+        if (!authenticator.authenticate(userName, password, this)) {
             writeAuthenticationRequired(authenticator.getRealm());
             return true;
         }

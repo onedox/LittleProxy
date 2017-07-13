@@ -1,5 +1,7 @@
 package org.littleshoot.proxy;
 
+import org.littleshoot.proxy.impl.ClientToProxyConnection;
+
 /**
  * Interface for objects that can authenticate someone for using our Proxy on
  * the basis of a username and password.
@@ -12,10 +14,12 @@ public interface ProxyAuthenticator {
      *            The user name.
      * @param password
      *            The password.
+     * @param clientConnection
+     *            The connection that this auth request came from.
      * @return <code>true</code> if the credentials are acceptable, otherwise
      *         <code>false</code>.
      */
-    boolean authenticate(String userName, String password);
+    boolean authenticate(String userName, String password, ClientToProxyConnection clientConnection);
     
     /**
      * The realm value to be used in the request for proxy authentication 

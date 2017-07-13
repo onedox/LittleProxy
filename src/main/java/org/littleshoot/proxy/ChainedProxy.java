@@ -1,6 +1,7 @@
 package org.littleshoot.proxy;
 
 import io.netty.handler.codec.http.HttpObject;
+import io.netty.handler.codec.http.HttpResponse;
 
 import java.net.InetSocketAddress;
 
@@ -55,6 +56,13 @@ public interface ChainedProxy extends SslEngineSource {
      * @param httpObject
      */
     void filterRequest(HttpObject httpObject);
+
+    /**
+     * Called with the CONNECT response from the chained proxy.
+     * 
+     * @param httpObject
+     */
+    void connectResponseReceived(HttpResponse httpResponse);
 
     /**
      * Called to let us know that connecting to this proxy succeeded.
