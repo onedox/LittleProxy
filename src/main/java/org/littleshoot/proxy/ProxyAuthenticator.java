@@ -2,6 +2,8 @@ package org.littleshoot.proxy;
 
 import org.littleshoot.proxy.impl.ClientToProxyConnection;
 
+import io.netty.handler.codec.http.HttpRequest;
+
 /**
  * Interface for objects that can authenticate someone for using our Proxy on
  * the basis of a username and password.
@@ -29,4 +31,12 @@ public interface ProxyAuthenticator {
      * @return
      */
     String getRealm();
+    
+    /**
+     * Determine whether authentication is required for a particular request.
+     * 
+     * @param httpRequest
+     * @return true if authentication is required or false if not
+     */
+    boolean isAuthenticationRequired(HttpRequest httpRequest);
 }

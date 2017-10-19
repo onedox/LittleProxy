@@ -973,6 +973,9 @@ public class ClientToProxyConnection extends ProxyConnection<HttpRequest> {
 
         if (authenticator == null)
             return false;
+        
+        if (!authenticator.isAuthenticationRequired(request))
+        	return false;
 
         if (!request.headers().contains(HttpHeaders.Names.PROXY_AUTHORIZATION)) {
             writeAuthenticationRequired(authenticator.getRealm());

@@ -2,6 +2,8 @@ package org.littleshoot.proxy;
 
 import org.littleshoot.proxy.impl.ClientToProxyConnection;
 
+import io.netty.handler.codec.http.HttpRequest;
+
 /**
  * Tests a single proxy that requires username/password authentication.
  */
@@ -38,5 +40,10 @@ public class UsernamePasswordAuthenticatingProxyTest extends BaseProxyTest
     @Override
     public String getRealm() {
         return null;
+    }
+    
+    @Override
+    public boolean isAuthenticationRequired(HttpRequest httpRequest) {
+    	return true;
     }
 }
